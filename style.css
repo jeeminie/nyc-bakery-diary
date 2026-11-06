@@ -1,0 +1,275 @@
+@font-face {
+  font-family: "Gaegu";
+  src:
+    url("Gaegu-Regular.woff2") format("woff2"),
+    url("Gaegu-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --cream: #fff8ec;
+  --brown: #57392c;
+  --muted: #8a6b55;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  color: var(--brown);
+  font-family: "Gaegu", cursive;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--brown);
+  outline-offset: 5px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* MAP */
+
+.map {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+}
+
+.map-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+/* HAND-DRAWN PINS */
+
+.spot {
+  position: absolute;
+  width: 76px;
+  height: 88px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #7fa45d;
+  transform: translate(-50%, -100%);
+  touch-action: manipulation;
+}
+
+.pin-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform-origin: 50% 100%;
+  transition: transform 160ms ease;
+}
+
+.spot:hover .pin-art {
+  transform: rotate(-4deg) scale(1.08);
+}
+
+.spot.eaten {
+  color: #a57a53;
+}
+
+/* WIDE POPUP — SAME SIZE BEFORE AND AFTER EATING */
+
+.bakery-card {
+  position: fixed;
+  width: min(96vw, 1500px);
+  height: 94dvh;
+  max-width: none;
+  max-height: 94dvh;
+  margin: auto;
+  padding: 68px 52px 36px;
+  overflow: hidden;
+
+  border: 2px solid #b99b76;
+  border-radius: 26px 32px 24px 30px;
+  background: var(--cream);
+  color: var(--brown);
+  font-family: "Gaegu", cursive;
+  text-align: center;
+}
+
+.bakery-card[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.bakery-card::backdrop {
+  background: #34251d70;
+}
+
+.close-button {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--brown);
+  font-size: 70px;
+  line-height: 1;
+}
+
+.bakery-card h1 {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: clamp(36px, 4vw, 60px);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+/* SPACIOUS BREAD AREA */
+
+#eating-stage {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+
+  padding-top: clamp(48px, 9dvh, 96px);
+  gap: clamp(48px, 9dvh, 96px);
+}
+
+.bread-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 82%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 0;
+
+  overflow: hidden;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  touch-action: manipulation;
+}
+
+.bread-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.bread-button:disabled {
+  cursor: default;
+}
+
+#bread-canvas {
+  display: block;
+  flex-shrink: 0;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+#bread-placeholder {
+  color: var(--muted);
+  font-size: 26px;
+  line-height: 1.4;
+}
+
+.hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(28px, 3vw, 36px);
+  line-height: 1.3;
+}
+
+/* RATING */
+
+#rating-stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.rating-label {
+  margin: 0;
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 400;
+}
+
+.rating-value {
+  margin: 0;
+  font-size: clamp(72px, 8vw, 110px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* SMALL SCREENS */
+
+@media (max-width: 600px) {
+  .bakery-card {
+    padding: 76px 20px 28px;
+  }
+
+  .bread-button {
+    width: 94%;
+  }
+
+  #eating-stage {
+    padding-top: 44px;
+    gap: 44px;
+  }
+}
+
+@media (max-height: 550px) {
+  .bakery-card {
+    padding: 44px 24px 18px;
+  }
+
+  .bakery-card h1 {
+    font-size: 32px;
+  }
+
+  .close-button {
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+  }
+
+  #eating-stage {
+    padding-top: 24px;
+    gap: 24px;
+  }
+
+  .hint {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}

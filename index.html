@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Eating My Way Through NYC</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main class="map" id="map">
+    <img
+      class="map-image"
+      src="map.png"
+      alt="My hand-drawn map of New York City"
+    >
+  </main>
+
+  <dialog
+    class="bakery-card"
+    id="bakery-dialog"
+    aria-labelledby="bakery-name"
+  >
+    <button
+      class="close-button"
+      id="close-dialog"
+      type="button"
+      aria-label="Close"
+    >×</button>
+
+    <h1 id="bakery-name"></h1>
+
+    <div id="eating-stage">
+      <button
+        class="bread-button"
+        id="bread-button"
+        type="button"
+        aria-label="Take a bite of the bread"
+        disabled
+      >
+        <canvas id="bread-canvas" aria-hidden="true" hidden></canvas>
+        <span id="bread-placeholder">Loading your bread…</span>
+      </button>
+
+      <p class="hint" id="hint" aria-live="polite"></p>
+    </div>
+
+    <div id="rating-stage" hidden>
+      <p class="rating-label">My Beli rating</p>
+      <p class="rating-value" id="rating-value"></p>
+    </div>
+  </dialog>
+</body>
+</html>
